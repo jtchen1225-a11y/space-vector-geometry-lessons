@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L04 教案</title><style>:root{--ink:#172033;--mut:#5b6476;--line:#dfe4ee;--bg:#f6f7fb;--card:#fff;--acc:#2563eb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 "Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif}
+main{max-width:1000px;margin:0 auto;padding:24px 16px 80px}h1{font-size:28px;line-height:1.3;margin:40px 0 12px;padding-top:12px;border-top:3px solid var(--acc)}main>h1:first-child{border:0;margin-top:0}
+h2{font-size:22px;margin:30px 0 10px}h3{font-size:18px;margin:22px 0 8px}blockquote{margin:12px 0;padding:10px 14px;background:#eef4ff;border-left:4px solid var(--acc);border-radius:6px}
+.tw{overflow-x:auto;margin:10px 0}table{border-collapse:collapse;background:var(--card);min-width:560px;width:100%;font-size:15.5px}th,td{border:1px solid var(--line);padding:7px 9px;vertical-align:top;text-align:left}th{background:#f0f2f8}
+a{color:var(--acc)}.bar{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:9px 16px;font-size:15px;z-index:3;display:flex;gap:14px;flex-wrap:wrap}
+mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%}@media print{.bar{display:none}body{background:#fff}h1{page-break-before:always}}</style>
+<script>window.MathJax={loader:{paths:{mathjax:'../../mathjax/es5'}},tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$']]},svg:{fontCache:'global'},options:{enableMenu:false}};</script>
+<script src="../../mathjax/es5/tex-svg-full.js" id="MathJax-script" async></script></head>
+<body><div class="bar"><a href="../../index.html">← 全章目錄</a><a href="index.html#present">開始上課</a><a href="handout.html">列印紙本</a></div><main><h1 id="L04">L04　空間向量基本定理與基底（新課講授）</h1>
+<blockquote>課型：<b>新課講授</b>｜第 4 節／全章 24 節｜教材範圍：1.1.2 空間向量基本定理（PDF 第 14–16 頁）。學生表現一律為「預期情況」，實際請依課堂證據調整。</blockquote>
+<h2>A. 課堂基本資料</h2>
+<ul>
+<li>年級：高中選修（相當於中五）</li>
+<li>課題：空間向量基本定理與基底</li>
+<li>課時：40分鐘</li>
+<li>課型：新課講授</li>
+<li>核心學習目標：能選定基底，把空間向量寫成 xa＋yb＋zc，並用基底計算數量積</li>
+<li>先備知識：L03 共面向量定理、L02 數量積、L01 首尾相接</li>
+<li>教學重點：三個不共面的向量可以生成所有空間向量，而且表示法唯一</li>
+<li>學習難點：找出由起點到終點的路線並寫對正負號；用基底展開時要用已知夾角</li>
+<li>本節刻意不教：單位正交基底與坐標（L06）</li>
+</ul>
+<h2>B. 40分鐘教學流程表</h2>
+<div class="tw"><table><thead><tr><th>時間</th><th>階段</th><th>教師活動</th><th>學生活動</th><th>分層支持</th><th>學習證據</th><th>對應投影片</th></tr></thead><tbody>
+<tr><td>0–5 分鐘</td><td>課堂安頓＋分層起步題</td><td>展示本節任務；學生一進課室就做起步題；巡視看誰能即時開始，再用快問確認舊知識。</td><td>獨立動筆完成起步題（A／B／C 自選），用手勢回答快問。</td><td>A 層附提示；C 層要求解釋。</td><td>起步題完成情況、1-3 快問票數。</td><td>1-1 今天的任務、1-2 熱身題、1-3 舊知識快問</td></tr>
+<tr><td>5–8 分鐘</td><td>情境引入＋設置懸念（短片、趣味情境或謎題）</td><td>展示情境，讓學生先猜並計票，只拋出懸念、不給答案。</td><td>觀察情境，表態猜測（可選「還不確定」）。</td><td>猜測不計對錯，人人可參與。</td><td>猜測票數（第 6 階段對照）。</td><td>2-1 猜一猜</td></tr>
+<tr><td>8–18 分鐘</td><td>核心概念講解與示範</td><td>播放粵語動畫→學生操作探索→引導學生自己說出規律→示範例題並說明每一步的理由；每段講解後接理解檢查。</td><td>看動畫、拖滑桿先猜後驗；用手勢回答；跟著步驟滑桿說出理由。</td><td>基礎薄弱者先看動畫第 1～2 幕的結論；能力較高者比較不同做法。</td><td>3-3、3-4、3-7 的全班同步作答票數。</td><td>3-1 粵語動畫、3-2 動手探索、3-3 說出規律、3-4 表示法唯一、3-5 跟著做：寫分解式、3-6 跟著做：用基底算、3-7 快問快答</td></tr>
+<tr><td>18–26 分鐘</td><td>學生獨立嘗試＋教師巡視</td><td>計時讓學生獨立嘗試；巡視、記錄代表性錯誤；按提示階梯支援（先提示、後答案）。</td><td>選一層獨立完成，卡住先按提示，完成後往上挑戰。</td><td>A／B／C 三層同頁，可隨時換層。</td><td>巡視觀察表、學生解題過程。</td><td>4-1 專注闖關、4-2 合理嗎？</td></tr>
+<tr><td>26–35 分鐘</td><td>典型錯誤分析＋分層練習</td><td>以不公開身份的方式展示預期錯誤，引導學生找出錯誤步驟與成因，再做升級挑戰。</td><td>找錯、解釋錯因（概念／程序／粗心）、修正，再做分層鞏固。</td><td>A 層用關鍵步驟提示；C 層做推理或遷移。</td><td>學生對錯因的口頭解釋、升級題完成情況。</td><td>5-1 抓錯偵探、5-2 再抓一次、5-3 升級挑戰</td></tr>
+<tr><td>35–40 分鐘</td><td>出口題＋當堂回饋</td><td>派發出口題、快速分類；回到懸念揭曉；總結核心知識。</td><td>獨立完成出口題，對照懸念說出答案，抄小結。</td><td>出口題全班同題；判準分三類。</td><td>出口小紙條（已掌握／部分掌握／尚未掌握）。</td><td>6-1 出口挑戰、6-2 懸念解開、6-3 核心知識小結</td></tr>
+</tbody></table></div>
+<h3>第 1 階段　0–5 分鐘　課堂安頓＋分層起步題（簡報：熱身挑戰：先動手算一算；螺旋：舊概念）</h3>
+<ul>
+<li>教師活動：展示本節任務；學生一進課室就做起步題；巡視看誰能即時開始，再用快問確認舊知識。</li>
+<li>學生活動：獨立動筆完成起步題（A／B／C 自選），用手勢回答快問。</li>
+<li>教學資源：互動簡報 1-1 今天的任務、1-2 熱身題、1-3 舊知識快問；學習單（handout.html）。</li>
+<li>理解檢查：正方體中，哪三個向量不共面？</li>
+<li>可能困難（預期情況）：都在底面內，共面；AB 與 DC 相等，只有兩個方向，共面</li>
+<li>應對策略：先提示、後答案（重讀題目→相關概念→部分線索→關鍵步驟→必要時示範後換相近題再試）；票數超過三成選錯時，退回本階段前一頁重講。</li>
+<li>支援提示：基礎薄弱：先確認舊知識再起步。</li>
+</ul>
+<h3>第 2 階段　5–8 分鐘　情境引入＋設置懸念（短片、趣味情境或謎題）（簡報：懸念時刻：你猜得到嗎？；螺旋：認知衝突）</h3>
+<ul>
+<li>教師活動：展示情境，讓學生先猜並計票，只拋出懸念、不給答案。</li>
+<li>學生活動：觀察情境，表態猜測（可選「還不確定」）。</li>
+<li>教學資源：互動簡報 2-1 猜一猜；學習單（handout.html）。</li>
+<li>理解檢查：猜測票數（第 6 階段對照）。</li>
+<li>可能困難（預期情況）：起步較慢、未能用手勢表態。</li>
+<li>應對策略：先提示、後答案（重讀題目→相關概念→部分線索→關鍵步驟→必要時示範後換相近題再試）；票數超過三成選錯時，退回本階段前一頁重講。</li>
+<li>支援提示：動機不足：題目短，先求做到一題。</li>
+<li>懸念：最少要幾個方向，才足以到達空間任何一點？（當下不給答案，第 6 階段揭曉：兩個方向只能在同一平面移動；要到達空間任何一點，至少要三個不共面的方向。）</li>
+</ul>
+<h3>第 3 階段　8–18 分鐘　核心概念講解與示範（簡報：看動畫，發現新規律；螺旋：新概念）</h3>
+<ul>
+<li>教師活動：播放粵語動畫→學生操作探索→引導學生自己說出規律→示範例題並說明每一步的理由；每段講解後接理解檢查。</li>
+<li>學生活動：看動畫、拖滑桿先猜後驗；用手勢回答；跟著步驟滑桿說出理由。</li>
+<li>教學資源：互動簡報 3-1 粵語動畫、3-2 動手探索、3-3 說出規律、3-4 表示法唯一、3-5 跟著做：寫分解式、3-6 跟著做：用基底算、3-7 快問快答；學習單（handout.html）。</li>
+<li>理解檢查：要表示所有空間向量，基底應是？；\(\boldsymbol{a},\boldsymbol{b},\boldsymbol{c}\) 不共面，\(3\boldsymbol{a}-2\boldsymbol{b}+\boldsymbol{c}=x\boldsymbol{a}+y\boldsymbol{b}+z\boldsymbol{c}\)，則？；\(\boldsymbol{a},\boldsymbol{b},\boldsymbol{c}\) 不共面，哪一組可作基底？</li>
+<li>可能困難（預期情況）：概念錯誤：三個共面的向量走不出平面；概念錯誤：只能表示同一平面內的向量；粗心失誤：漏了負號</li>
+<li>應對策略：先提示、後答案（重讀題目→相關概念→部分線索→關鍵步驟→必要時示範後換相近題再試）；票數超過三成選錯時，退回本階段前一頁重講。</li>
+<li>支援提示：疲累或注意力不足：懸念與手勢作答都是低壓力回應，可個別關心。</li>
+</ul>
+<h3>第 4 階段　18–26 分鐘　學生獨立嘗試＋教師巡視（簡報：輪到你出手：闖關練習；螺旋：初步應用）</h3>
+<ul>
+<li>教師活動：計時讓學生獨立嘗試；巡視、記錄代表性錯誤；按提示階梯支援（先提示、後答案）。</li>
+<li>學生活動：選一層獨立完成，卡住先按提示，完成後往上挑戰。</li>
+<li>教學資源：互動簡報 4-1 專注闖關、4-2 合理嗎？；學習單（handout.html）。</li>
+<li>理解檢查：基底夾角是 60°，\((\boldsymbol{a}+\boldsymbol{b})^2\) 應等於？</li>
+<li>可能困難（預期情況）：概念錯誤：只有垂直時才沒有中間項；程序錯誤：與平方差混淆</li>
+<li>應對策略：先提示、後答案（重讀題目→相關概念→部分線索→關鍵步驟→必要時示範後換相近題再試）；票數超過三成選錯時，退回本階段前一頁重講。</li>
+<li>支援提示：基礎薄弱：先看結論性畫面再操作；能力較高：追問「為甚麼」。</li>
+</ul>
+<h3>第 5 階段　26–35 分鐘　典型錯誤分析＋分層練習（簡報：抓錯偵探＋升級挑戰；螺旋：初步應用（錯誤修正））</h3>
+<ul>
+<li>教師活動：以不公開身份的方式展示預期錯誤，引導學生找出錯誤步驟與成因，再做升級挑戰。</li>
+<li>學生活動：找錯、解釋錯因（概念／程序／粗心）、修正，再做分層鞏固。</li>
+<li>教學資源：互動簡報 5-1 抓錯偵探、5-2 再抓一次、5-3 升級挑戰；學習單（handout.html）。</li>
+<li>理解檢查：學生對錯因的口頭解釋、升級題完成情況。</li>
+<li>可能困難（預期情況）：程序錯誤：B→A 與 \(\boldsymbol{a}\) 方向相反，應為 \(-\boldsymbol{a}\)。；概念錯誤：基底只要不共面，不一定垂直。</li>
+<li>應對策略：先提示、後答案（重讀題目→相關概念→部分線索→關鍵步驟→必要時示範後換相近題再試）；票數超過三成選錯時，退回本階段前一頁重講。</li>
+<li>支援提示：基礎薄弱：用 A 層提示；能力較高：挑戰 C 層，不安排當助手。</li>
+</ul>
+<h3>第 6 階段　35–40 分鐘　出口題＋當堂回饋（簡報：最後一關：出口挑戰；螺旋：學習證據）</h3>
+<ul>
+<li>教師活動：派發出口題、快速分類；回到懸念揭曉；總結核心知識。</li>
+<li>學生活動：獨立完成出口題，對照懸念說出答案，抄小結。</li>
+<li>教學資源：互動簡報 6-1 出口挑戰、6-2 懸念解開、6-3 核心知識小結；學習單（handout.html）。</li>
+<li>理解檢查：出口小紙條（已掌握／部分掌握／尚未掌握）。</li>
+<li>可能困難（預期情況）：起步較慢、未能用手勢表態。</li>
+<li>應對策略：先提示、後答案（重讀題目→相關概念→部分線索→關鍵步驟→必要時示範後換相近題再試）；票數超過三成選錯時，退回本階段前一頁重講。</li>
+<li>支援提示：三類學生同題，判準只在教師版。</li>
+</ul>
+<h2>C. 課堂練習</h2>
+<h3>1-2 熱身題</h3>
+<div class="tw"><table><thead><tr><th>層次</th><th>題目</th><th>答案</th><th>提示階梯</th></tr></thead><tbody>
+<tr><td>A層 基礎支持</td><td>把 \(\overrightarrow{AC_1}\) 寫成三段首尾相接的向量</td><td>\(\overrightarrow{AB}\)＋\(\overrightarrow{BC}\)＋\(\overrightarrow{CC_1}\)</td><td>由 A 出發，先到底面的 C。；再由 C 向上到 C₁。</td></tr>
+<tr><td>B層 核心達標</td><td>\(\overrightarrow{BC}\)、\(\overrightarrow{CC_1}\) 分別等於從 A 出發的哪條棱？</td><td>\(\overrightarrow{AD}\)、\(\overrightarrow{AA_1}\)</td><td>找平行、同向、等長的棱。</td></tr>
+<tr><td>C層 延伸挑戰</td><td>路線不同，結果會不同嗎？試用另一條路線到 C₁。</td><td>不會，例如 \(\overrightarrow{AD}\)＋\(\overrightarrow{DD_1}\)＋\(\overrightarrow{D_1C_1}\)，結果相同</td><td>不設提示，鼓勵先自行解釋</td></tr>
+</tbody></table></div>
+<h3>4-1 專注闖關（專注 7 分鐘）</h3>
+<div class="tw"><table><thead><tr><th>層次</th><th>題目</th><th>答案</th><th>提示階梯</th></tr></thead><tbody>
+<tr><td>A層 基礎支持</td><td>用 \(\boldsymbol{a}\)、\(\boldsymbol{b}\)、\(\boldsymbol{c}\) 表示 \(\overrightarrow{A_1C}\)</td><td>\(\boldsymbol{a}+\boldsymbol{b}-\boldsymbol{c}\)</td><td>A₁ 先往下到 A，所以有 \(-\boldsymbol{c}\)。；路線：A₁→A→B→C。</td></tr>
+<tr><td>B層 核心達標</td><td>四面體 O-ABC，D 是 AB 中點，E 是 CD 中點，用 \(\overrightarrow{OA}\)、\(\overrightarrow{OB}\)、\(\overrightarrow{OC}\) 表示 \(\overrightarrow{OE}\)</td><td>¼\(\overrightarrow{OA}\)＋¼\(\overrightarrow{OB}\)＋½\(\overrightarrow{OC}\)</td><td>先寫 OD。；E 是 C、D 的中點。</td></tr>
+<tr><td>C層 延伸挑戰</td><td>為甚麼 \(\boldsymbol{a}+\boldsymbol{b}\)，\(\boldsymbol{a}-\boldsymbol{b}\)，\(\boldsymbol{b}\) 不能作基底？說明。</td><td>\(\boldsymbol{b}=\tfrac12[(\boldsymbol{a}+\boldsymbol{b})-(\boldsymbol{a}-\boldsymbol{b})]\)，三者共面</td><td>不設提示，鼓勵先自行解釋</td></tr>
+</tbody></table></div>
+<h3>5-3 升級挑戰</h3>
+<div class="tw"><table><thead><tr><th>層次</th><th>題目</th><th>答案</th><th>提示階梯</th></tr></thead><tbody>
+<tr><td>A層 基礎支持</td><td>\(\overrightarrow{AC_1}\)＝x(\(\overrightarrow{AB}\)＋\(\overrightarrow{BC}\)＋\(\overrightarrow{CC_1}\))，求 x</td><td>1</td><td>括號內首尾相接等於甚麼？</td></tr>
+<tr><td>B層 核心達標</td><td>E 是上底中心，\(\overrightarrow{AE}\)＝\(\overrightarrow{AA_1}\)＋x\(\overrightarrow{AB}\)＋y\(\overrightarrow{AD}\)，求 x、y</td><td>\(x=y=\tfrac12\)</td><td>參考 3-5。</td></tr>
+<tr><td>C層 延伸挑戰</td><td>哪一個基向量能與 \(\overrightarrow{OA}\)＋\(\overrightarrow{OB}\)、\(\overrightarrow{OA}\)－\(\overrightarrow{OB}\) 組成新基底？</td><td>\(\overrightarrow{OC}\)：前兩者都在平面 OAB 內，只有 \(\overrightarrow{OC}\) 不在</td><td>不設提示，鼓勵先自行解釋</td></tr>
+</tbody></table></div>
+<h3>巡視觀察表（也印在 handout.html 的教師版）</h3>
+<div class="tw"><table><thead><tr><th>觀察重點（錯誤類型）</th><th>人數</th><th>用於錯誤分析</th></tr></thead><tbody>
+<tr><td>反方向走卻寫正號（程序）</td><td></td><td>☐</td></tr>
+<tr><td>基底展開時把夾角當 90°（概念）</td><td></td><td>☐</td></tr>
+<tr><td>中點係數錯（粗心）</td><td></td><td>☐</td></tr>
+<tr><td>其他：</td><td></td><td>☐</td></tr>
+</tbody></table></div>
+<h3>不同學生的支援</h3>
+<div class="tw"><table><thead><tr><th>學生情況</th><th>本節做法</th></tr></thead><tbody>
+<tr><td>基礎薄弱</td><td>從 A 層與提示階梯開始，先確認先備知識地圖中的舊知識；成功後逐步減少提示，不長期只做低層次題。</td></tr>
+<tr><td>動機不足</td><td>任務短而明確、可自選層次、先猜後驗，讓學生看到可達成的進步；不等同懶惰。</td></tr>
+<tr><td>疲累或注意力不足</td><td>每段都有短回應（手勢、拖滑桿）；任務分段；個別關心，持續異常疲倦依校方程序跟進，不當成紀律問題。</td></tr>
+<tr><td>能力較高</td><td>做 C 層的解釋、比較、推理與遷移；不固定安排為其他學生的助手。</td></tr>
+</tbody></table></div>
+<h2>D. 典型錯誤分析</h2>
+<p>以下均為「預期錯誤」（未取自真實學生作答），教師可換成當堂收集、去識別化的例子。</p>
+<h3>5-1 抓錯偵探：這個分解式對嗎？</h3>
+<ul>
+<li>題目：基底 \(\overrightarrow{AB}\)＝a、\(\overrightarrow{AD}\)＝b、\(\overrightarrow{AA_1}\)＝c，表示 \(\overrightarrow{BD_1}\)。</li>
+<li>錯誤示例：B→A→D→D₁ → \(\overrightarrow{BD_1}=\boldsymbol{a}+\boldsymbol{b}+\boldsymbol{c}\)（錯在第 2 步）</li>
+<li>可能原因：程序錯誤：B→A 與 \(\boldsymbol{a}\) 方向相反，應為 \(-\boldsymbol{a}\)。</li>
+<li>診斷問題：這個解法哪一步開始出現問題？為甚麼這樣計算不正確？怎樣檢查答案是否合理？</li>
+<li>教師引導方式：不公開學生身份；先讓學生指出步驟，再追問成因，最後由學生修正。</li>
+<li>正確做法：\(\overrightarrow{BD_1}=-\boldsymbol{a}+\boldsymbol{b}+\boldsymbol{c}\)</li>
+<li>修正後練習：E 是上底中心，\(\overrightarrow{AE}\)＝\(\overrightarrow{AA_1}\)＋x\(\overrightarrow{AB}\)＋y\(\overrightarrow{AD}\)，求 x、y</li>
+</ul>
+<h3>5-2 再抓一次：基底一定垂直？</h3>
+<ul>
+<li>題目：基底 \(\boldsymbol{a},\boldsymbol{b}\) 長度都是 1、夾角 60°，求 \((\boldsymbol{a}+\boldsymbol{b})\cdot\boldsymbol{b}\)。</li>
+<li>錯誤示例：基底互相垂直，\(\boldsymbol{a}\cdot\boldsymbol{b}=0\) → 結果＝\(\boldsymbol{b}^2=1\)（錯在第 1 步）</li>
+<li>可能原因：概念錯誤：基底只要不共面，不一定垂直。</li>
+<li>診斷問題：這個解法哪一步開始出現問題？為甚麼這樣計算不正確？怎樣檢查答案是否合理？</li>
+<li>教師引導方式：不公開學生身份；先讓學生指出步驟，再追問成因，最後由學生修正。</li>
+<li>正確做法：\(\boldsymbol{a}\cdot\boldsymbol{b}=\tfrac12\)，結果＝\(\tfrac12+1=\tfrac32\)</li>
+<li>修正後練習：E 是上底中心，\(\overrightarrow{AE}\)＝\(\overrightarrow{AA_1}\)＋x\(\overrightarrow{AB}\)＋y\(\overrightarrow{AD}\)，求 x、y</li>
+</ul>
+<h2>E. 出口題及評估</h2>
+<ul>
+<li>出口題：平行六面體 ABCD-A₁B₁C₁D₁ 中，M 是 A₁D₁ 中點，基底 \(\overrightarrow{AB}\)＝a、\(\overrightarrow{AD}\)＝b、\(\overrightarrow{AA_1}\)＝c。寫出 \(\overrightarrow{BM}\) 的分解式。</li>
+<li>參考答案：\(\overrightarrow{BM}=-\boldsymbol{a}+\tfrac12\boldsymbol{b}+\boldsymbol{c}\)</li>
+<li>時間：2～3 分鐘，獨立完成。</li>
+</ul>
+<div class="tw"><table><thead><tr><th>結果</th><th>判準及下一節安排</th></tr></thead><tbody>
+<tr><td>已掌握</td><td>路線與正負號都對 → 下一節綜合練習做 C 層</td></tr>
+<tr><td>部分掌握</td><td>路線對、符號或中點係數有一處錯 → 下一節練習由 B 層開始</td></tr>
+<tr><td>尚未掌握</td><td>未能走出路線 → 小組用紙盒走一次路線再換字母</td></tr>
+</tbody></table></div>
+<h2>F. 課後反思（上課後由教師依真實證據填寫）</h2>
+<ul>
+<li>本節課最有效的設計：</li>
+<li>學生最常見的困難：</li>
+<li>需要個別跟進的學生：</li>
+<li>下一節課的調整：</li>
+</ul>
+<h2>G. 螺旋設計與學習追蹤</h2>
+<p><b>本課型路徑</b>：概念深化螺旋：舊概念 → 認知衝突 → 新概念 → 初步應用</p>
+<div class="tw"><table><thead><tr><th>時間</th><th>階段</th><th>螺旋位置</th></tr></thead><tbody>
+<tr><td>0–5 分鐘</td><td>課堂安頓＋分層起步題</td><td>舊概念</td></tr>
+<tr><td>5–8 分鐘</td><td>情境引入＋設置懸念（短片、趣味情境或謎題）</td><td>認知衝突</td></tr>
+<tr><td>8–18 分鐘</td><td>核心概念講解與示範</td><td>新概念</td></tr>
+<tr><td>18–26 分鐘</td><td>學生獨立嘗試＋教師巡視</td><td>初步應用</td></tr>
+<tr><td>26–35 分鐘</td><td>典型錯誤分析＋分層練習</td><td>初步應用（錯誤修正）</td></tr>
+<tr><td>35–40 分鐘</td><td>出口題＋當堂回饋</td><td>學習證據</td></tr>
+</tbody></table></div>
+<h3>1. 先備知識地圖</h3>
+<div class="tw"><table><thead><tr><th>舊知識</th><th>本課怎樣用</th><th>怎樣確認（哪一頁或哪一題）</th><th>不足時的補救</th></tr></thead><tbody>
+<tr><td>共面向量定理</td><td>判斷三個向量能否作基底</td><td>1-3 快問</td><td>回到 L03 的 3-2 互動</td></tr>
+<tr><td>首尾相接</td><td>由路線寫出分解式</td><td>1-2 熱身題、3-5</td><td>先走路線再換字母</td></tr>
+<tr><td>數量積</td><td>用基底展開求數量積</td><td>3-6</td><td>先做 L02 3-6 的展開</td></tr>
+</tbody></table></div>
+<h3>2. 螺旋深化路徑</h3>
+<ul>
+<li>學生已經理解：兩個不共線向量可以表示平面內所有向量。</li>
+<li>本次新增的理解：多一個不共面向量，就能表示整個空間，而且只有一種表示法；複雜圖形的計算可以全部歸結為基底之間的長度和夾角。</li>
+<li>之後會延伸到：L06 取互相垂直的單位基底就得到坐標；L10 起用基底或坐標求角與距離。</li>
+</ul>
+<h3>3. 分層學習任務</h3>
+<div class="tw"><table><thead><tr><th>學生</th><th>任務層</th><th>支持方式</th><th>完成後</th></tr></thead><tbody>
+<tr><td>基礎薄弱</td><td>A 層</td><td>提示階梯、附圖與第一步線索</td><td>嘗試 B 層</td></tr>
+<tr><td>一般</td><td>B 層</td><td>必要時看提示</td><td>嘗試 C 層</td></tr>
+<tr><td>能力較高</td><td>C 層</td><td>少提示，要求解釋或比較</td><td>自編變式題</td></tr>
+</tbody></table></div>
+<p>分層指任務與支持不同，不是固定學生標籤；學生可依表現隨時換層。</p>
+<h3>4. 間隔重現計劃</h3>
+<div class="tw"><table><thead><tr><th>概念</th><th>何時再出現</th><th>形式（改變題目或情境）</th></tr></thead><tbody>
+<tr><td>基底表示</td><td>下一節（L05）</td><td>在四面體和三棱柱中以不同基底表示</td></tr>
+<tr><td>用基底算數量積</td><td>約一週後（L05、延遲檢測）</td><td>換夾角條件</td></tr>
+<tr><td>基底與坐標的關係</td><td>約一個月後（L09）</td><td>比較基底法與坐標法</td></tr>
+</tbody></table></div>
+<h3>5. 學習證據追蹤</h3>
+<ul>
+<li>出口題（當堂）：見 E 節。</li>
+<li>延遲檢測（約一週後，不提前通知、不先複習、不計分）：四面體 ABCD 中，E、F 分別是 AB、CD 中點，用 \(\overrightarrow{AB}\)、\(\overrightarrow{AC}\)、\(\overrightarrow{AD}\) 表示 \(\overrightarrow{EF}\)。　答案：½\(\overrightarrow{AC}\)＋½\(\overrightarrow{AD}\)－½\(\overrightarrow{AB}\)</li>
+</ul>
+<div class="tw"><table><thead><tr><th>出口題</th><th>延遲檢測</th><th>判斷</th><th>跟進</th></tr></thead><tbody>
+<tr><td>已掌握</td><td>已掌握</td><td>真正掌握</td><td>進入更高層次任務</td></tr>
+<tr><td>已掌握</td><td>未掌握</td><td>短暫學會</td><td>增加間隔重現，改變情境再練</td></tr>
+<tr><td>未掌握</td><td>已掌握</td><td>延後學會</td><td>了解後續哪些安排有效</td></tr>
+<tr><td>未掌握</td><td>未掌握</td><td>尚未掌握</td><td>找出成因，小組或個別重建概念</td></tr>
+</tbody></table></div>
+<h2>教案品質檢查</h2>
+<ul>
+<li>☑ 是否具有明確、可觀察的學習目標？</li>
+<li>☑ 各教學階段的總時間是否為40分鐘？</li>
+<li>☑ 是否讓不同程度學生都有明確任務？</li>
+<li>☑ 是否設計至少兩個理解檢查點？</li>
+<li>☑ 是否安排學生獨立思考及解題？</li>
+<li>☑ 是否預測典型數學錯誤？</li>
+<li>☑ 是否提供分層支持？</li>
+<li>☑ 是否包含有效的出口題？</li>
+<li>☑ 是否說明如何利用學習證據調整教學？</li>
+<li>☑ 是否考慮教師實際工作量及課堂可行性？</li>
+<li>☑ 簡報是否至少 25 頁（含階段頁），最後一頁是否為本節核心知識小結？</li>
+<li>☑ 是否標明各階段在螺旋路徑的位置？</li>
+<li>☑ 是否有先備知識地圖？</li>
+<li>☑ 是否說明本次比過去增加了哪些新理解？</li>
+<li>☑ 是否規劃間隔重現？</li>
+<li>☑ 是否設計延遲檢測，能分辨短暫學會與真正掌握？</li>
+</ul></main></body></html>
