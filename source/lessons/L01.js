@@ -94,7 +94,7 @@ S.stepper('3-5','跟著做：體對角線','跟著做：化簡 BA＋BC＋BB₁',
  {t:`底面是平行四邊形：${vv('BA')}＋${vv('BC')}＝${vv('BD')}`,d:k=>F.vec('B','D',VIO,'',k)},
  {t:`${vv('BB1')}＝${vv('DD1')}：相等向量可平移，接到 D`,d:k=>F.vec('D','D1',AMB,'',k)},
  {t:`首尾相接：${vv('BD')}＋${vv('DD1')}＝${vv('BD1')}`,d:k=>F.vec('B','D1',RED,'',k)}
-])},{example:{q:`同一圖中化簡 ${vv('CB')}＋${vv('CD')}＋${vv('CC1')}。`,steps:[`${vv('CB')}＋${vv('CD')}＝${vv('CA')}`,`${vv('CC1')}＝${vv('AA1')}`],ans:`${vv('CA1')}`}}),
+])},{example:{q:`用上一頁的圖，化簡 ${vv('CB')}＋${vv('CD')}＋${vv('CC1')}。`,steps:[`${vv('CB')}＋${vv('CD')}＝${vv('CA')}`,`${vv('CC1')}＝${vv('AA1')}`],ans:`${vv('CA1')}`}}),
 S.stepper('3-6','跟著做：中點','跟著做：中線向量怎樣寫？',['先把中點寫成向量式。'],(h)=>{const T=G3.solid({P:[.6,1,1.8],A:[1.6,0,0],B:[1.7,2.2,0],C:[-.2,1.6,0]},[['P','A','B'],['P','B','C'],['P','C','A'],['A','B','C']]);const F=G3.frame(T,{W:440,H:200,m:34,fs:38,extra:[[.75,1.9,0]]});const M=G3.mid(T.V.B,T.V.C);G3.steps(h,440,200,[
  {t:'三棱錐 P-ABC，M 是 BC 中點',d:k=>F.base()+F.dot(M,RED)+F.lab(M,'M',RED,[0,22])},
  {t:`M 是中點：${vv('AM')}＝½(${vv('AB')}＋${vv('AC')})`,d:k=>F.vec('A',M,VIO,'',k)},

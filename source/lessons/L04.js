@@ -75,7 +75,7 @@ S.check('3-3','說出規律','你發現的規律是甚麼？',['用「不共面�
  ['任意三個非零向量','概念錯誤：三個共面的向量走不出平面'],
  ['兩個不共線的向量','概念錯誤：只能表示同一平面內的向量']
 ]),
-S.check('3-4','表示法唯一','同一向量可以有兩種寫法嗎？',['想想係數的意思。'],'\\(\\boldsymbol{a},\\boldsymbol{b},\\boldsymbol{c}\\) 不共面，\\(3\\boldsymbol{a}-2\\boldsymbol{b}+\\boldsymbol{c}=x\\boldsymbol{a}+y\\boldsymbol{b}+z\\boldsymbol{c}\\)，則？',[
+S.check('3-4','表示法唯一','同一向量可以有兩種寫法嗎？',['想想係數的意思。'],'\\(\\boldsymbol{a},\\boldsymbol{b},\\boldsymbol{c}\\) 不共面，\\(3\\boldsymbol{a}-2\\boldsymbol{b}+\\boldsymbol{c}\\) \\(=x\\boldsymbol{a}+y\\boldsymbol{b}+z\\boldsymbol{c}\\)，則？',[
  ['\\(x=3\\)，\\(y=-2\\)，\\(z=1\\)','表示法唯一，係數對應相等',1],
  ['\\(x=3\\)，\\(y=2\\)，\\(z=1\\)','粗心失誤：漏了負號'],
  ['不能確定','概念錯誤：不共面時表示法唯一']
@@ -85,7 +85,7 @@ S.stepper('3-5','跟著做：寫分解式','跟著做：表示上底中心',['�
  {t:'E 是上底中心，即 A₁C₁ 的中點',d:k=>F.seg('A1','C1',GRY,2.5,'6 5')+F.dot(E,RED)+F.lab(E,'E',RED,[6,-22])},
  {t:`路線：${vv('AE')}＝${vv('AA1')}＋${vv('A1E')}`,d:k=>F.vec('A1',E,VIO,'',k)},
  {t:`${vv('A1E')}＝½(a＋b)，所以 ${vv('AE')}＝½a＋½b＋c`,d:k=>F.vec('A',E,RED,'',k)}
-])},{example:{q:`同一圖中，用基底表示 ${vv('DB1')}。`,steps:[`${vv('DA')}＋${vv('AB')}＋${vv('BB1')}`],ans:'\\(\\boldsymbol{a}-\\boldsymbol{b}+\\boldsymbol{c}\\)'}}),
+])},{example:{q:`用上一頁的圖和基底，表示 ${vv('DB1')}。`,steps:[`${vv('DA')}＋${vv('AB')}＋${vv('BB1')}`],ans:'\\(\\boldsymbol{a}-\\boldsymbol{b}+\\boldsymbol{c}\\)'}}),
 S.stepper('3-6','跟著做：用基底算','跟著做：用基底算數量積',['直三棱柱：∠ABC＝60°，BA＝3，BC＝BB₁＝2。'],(h)=>{const F=G3.frame(Prm,{W:440,H:200,m:34,fs:38});G3.steps(h,440,200,[
  {t:`取基底 ${vv('BA')}、${vv('BC')}、${vv('BB1')}：長度和夾角都已知`,d:k=>F.base()+F.vec('B','A',BLU,'',k)+F.vec('B','C',GRN,'',k)+F.vec('B','B1',AMB,'',k)},
  {t:`${vv('AB1')}＝－${vv('BA')}＋${vv('BB1')}，${vv('BC1')}＝${vv('BC')}＋${vv('BB1')}`,d:k=>F.vec('A','B1',RED,'',k)+F.vec('B','C1',VIO,'',k)},

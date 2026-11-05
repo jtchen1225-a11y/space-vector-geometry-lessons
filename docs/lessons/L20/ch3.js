@@ -36,7 +36,7 @@ S.stepper('3-5','跟著做：基底求距離','跟著做：棱不垂直，也能
 S.stepper('3-6','跟著做：點到直線','跟著做：P(1,2,0) 到直線',['直線過 A(1,0,0)，方向 \\(\\boldsymbol{v}=(0,1,1)\\)。'],(h)=>{G3.steps(h,440,210,[
  {t:'設垂足 \\(E(1,t,t)\\)，\\(\\overrightarrow{PE}=(0,t-2,t)\\)',d:k=>G3.txt(220,50,'E(1,t,t)',{c:BLU,fs:38})},
  {t:'垂直：\\((t-2)+t=0\\)，得 \\(t=1\\)',d:k=>G3.txt(220,110,'t＝1',{c:GRN,fs:38})},
- {t:'\\(\\overrightarrow{PE}=(0,-1,1)\\)，距離 \\(\\sqrt2\\)；投影法：\\(d^2=|\\overrightarrow{AP}|^2-\\dfrac{(\\overrightarrow{AP}\\cdot\\boldsymbol{v})^2}{|\\boldsymbol{v}|^2}\\)',d:k=>G3.txt(220,170,'d＝√2',{c:RED,fs:38})}
+ {t:'\\(\\overrightarrow{PE}=(0,-1,1)\\)，距離 \\(\\sqrt2\\)',d:k=>G3.txt(220,170,'d＝√2',{c:RED,fs:38})}
 ])},{formula:{label:'投影法',tex:'d^2=|\\overrightarrow{AP}|^2-\\frac{(\\overrightarrow{AP}\\cdot\\boldsymbol{v})^2}{|\\boldsymbol{v}|^2}'}}),
 S.check('3-7','快問快答','快問快答：最短的是？',null,'棱長 1 的正方體，B 到 D₁ 的距離是？',[
  ['\\(\\sqrt3\\)','體對角線',1],

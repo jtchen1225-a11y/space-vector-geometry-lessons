@@ -1,3 +1,4 @@
+window.FIT = {"1-2": {"h": 2}, "3-4": {"h": 2}, "3-7": {"h": 1}, "4-1": {"h": 3}, "4-2": {"h": 1}, "5-1": {"h": 1}, "5-3": {"h": 2}};
 /* ============================================================
    runtime.js — 全章共用：3D 繪圖（G3）與投影片簡寫（S）。
    建置時內嵌在每節 ch1.js 最前面，所以驗證工具與紙本都能直接使用。
@@ -190,10 +191,142 @@ window.S = window.S || (function () {
     (() => {
       const m = Object.assign({}, more || {}); const pts = (points || (m.fig ? (PTS[kind] || []).slice(0, 1) : PTS[kind]) || []).slice();
       // m.fig：左欄小圖（題目需要看圖時用），放在重點文字之後
-      if (m.fig) { pts[pts.length - 1] += `<div style="margin:6px 0 0 -34px">${m.fig}</div>`; delete m.fig; }
-      return Object.assign({ sec, secName, title, points: pts, visual, _k: kind, _d: data }, m);
+      const figHtml = m.fig ? `<div style="margin:6px 0 0 -34px">${m.fig}</div>` : '';
+      if (m.fig) { pts[pts.length - 1] += figHtml; delete m.fig; }
+      return Object.assign({ sec, secName, title, points: pts, visual, _k: kind, _d: data, _fig: figHtml }, m);
     })();
+
+  /* ---------- 拆頁：內容放不下時拆成多頁，絕不縮字 ----------
+     window.FIT（來自 source/fit.json，由 autofit.py 依實測產生）：{ 節碼: { q: 題目頁拆分級, h: 解說頁拆分級 } }
+     h=0 表示不拆（提示、答案、揭曉都留在同一頁）；h≥1 時，題目頁只放題目，提示／答案／解說移到後面的頁。
+     後續頁的 _k 是 'help'：教案與學習單只讀第一頁（資料完整），不會重複。 */
+  const live = () => !!(window.LS && window.LS.report);   // 紙本（handout.js）的 LS 沒有 report
+  const strip = (h, sel) => h.querySelectorAll(sel).forEach(e => e.remove());
+  const chunk = (a, n) => { const r = [], k = Math.ceil(a.length / n); for (let i = 0; i < a.length; i += k) r.push(a.slice(i, i + k)); return r; };
+  const flipHint = p => (p || []).map(t => String(t).replace(/卡住先按「提示」/, '卡住翻下一頁看提示'));
+
+  function expand(s) {
+    const f = (window.FIT || {})[s.sec] || {};
+    const q = f.q || 0; let hl = f.h || 0;
+    const out = [];
+    const page = (o) => { const n = out.length; out.push(Object.assign({}, s, { sec: n ? `${s.sec}-${n + 1}` : s.sec, _base: s.sec, _role: n ? 'h' : 'q' }, n ? { _k: 'help', _d: {} } : {}, o)); };
+    const helpPts = t => { const p = [t]; if (s._fig) p[0] += s._fig; return p; };
+    const k = s._k, d = s._d || {};
+    if (k === 'tasks' || k === 'drill') {
+      const T = d.tiers, opt = { timer: d.timer, watch: d.watch };
+      if (q > 0 && !hl) hl = 1;
+      if (!hl) out.push(s);
+      else {
+        chunk(T, q + 1).forEach((grp, i) => page({
+          title: q ? `${s.title}（${i + 1}）` : s.title, points: flipHint(s.points),
+          visual: (h) => {
+            if (!live()) { if (i === 0) LS.tasks(h, T, opt); return; }
+            LS.tasks(h, grp, i === 0 ? opt : {}); strip(h, '.ls-card .ls-actions, .ls-hints, .ls-ans');
+          },
+        }));
+        let groups;
+        if (hl === 1) groups = [T];
+        else if (hl === 2) groups = [T.slice(0, 2), T.slice(2)];
+        else if (hl === 3) groups = T.map(t => [t]);
+        else { groups = []; T.forEach(t => { if ((t.hints || []).length) groups.push([Object.assign({}, t, { ans: null })]); if (t.ans) groups.push([Object.assign({}, t, { hints: null })]); }); }
+        groups.forEach(grp => page({
+          title: `${grp.some(t => (t.hints || []).length) ? '提示與答案' : '答案'}（${grp.map(t => t.tier).join('、')} 層）`,
+          points: helpPts(grp.some(t => (t.hints || []).length) ? '先自己試，卡住才開提示。' : '先自己試，再對答案。'),
+          visual: (h) => { if (live()) LS.tasks(h, grp, {}); },
+        }));
+      }
+    } else if (k === 'check' && hl) {
+      const o = d.options;
+      page({ visual: (h) => LS.check(h, { q: d.q, options: o.map(x => ({ t: x.t, ok: x.ok })) }) });
+      const idx = o.map((_, i) => i);
+      const groups = hl <= 2 ? [idx] : hl === 3 ? chunk(idx, 2) : idx.map(i => [i]);
+      groups.forEach(g => page({
+        title: `${s.title}（解說）`, points: [hl >= 2 ? d.q : '每個選項對或錯的原因。'],   // 右欄不放題目時，題目移到左欄
+        visual: (h) => {
+          if (!live()) return;
+          LS.check(h, { q: d.q, options: o, tally: false });
+          h.querySelector('.ls-check').classList.add('revealed');
+          h.querySelectorAll('.ls-opt').forEach((el, i) => { el.classList.toggle('ok', !!o[i].ok); if (!g.includes(i)) el.remove(); });
+          strip(h, '.ls-actions'); if (hl >= 2) strip(h, '.ls-q');
+        },
+      }));
+    } else if (k === 'mistake' && (hl || q)) {
+      if (q) {
+        page({ visual: (h) => { LS.mistake(h, live() ? { who: d.who, q: d.q } : d); strip(h, '.ls-actions'); } });
+        page({ title: `${s.title}（解法）`, points: ['這個解法哪一步開始出問題？'], visual: (h) => { if (live()) LS.mistake(h, { who: d.who, steps: d.steps, wrong: d.wrong }); } });
+      } else page({ visual: (h) => { LS.mistake(h, live() ? { who: d.who, q: d.q, steps: d.steps, wrong: d.wrong } : d); } });
+      const show = (h, o2, wrongOn) => {
+        LS.mistake(h, o2);
+        const root = h.querySelector('.ls-mistake');
+        root.classList.add('found', 'fixed');
+        if (wrongOn) h.querySelectorAll('.ls-steps li').forEach((li, i) => li.classList.toggle('bad', i === d.wrong));
+        strip(h, '.ls-actions');
+      };
+      const ST = { who: d.who, steps: d.steps, wrong: d.wrong };
+      const pages = hl <= 1 ? [Object.assign({}, ST, { why: d.why, fix: d.fix })]
+        : hl === 2 ? [Object.assign({}, ST, { why: d.why }), { who: '修正', fix: d.fix }]
+          : [{ who: '錯在哪裏', why: d.why }, { who: '修正', fix: d.fix }];
+      pages.forEach(o2 => page({ title: `${s.title}（解析）`, points: [d.q || '想一想：下次怎樣避免？'], visual: (h) => { if (live()) show(h, o2, !!o2.steps); } }));
+    } else if (k === 'exit' && hl) {
+      page({ visual: (h) => { LS.exit(h, d); if (live()) strip(h, '.ls-ans, .ls-actions'); } });
+      page({
+        title: '出口題：參考答案', points: [hl >= 2 ? d.q : '對照自己的答案。'],
+        visual: (h) => {
+          if (!live()) return;
+          LS.exit(h, d); h.querySelector('.ls-ans').classList.add('show'); strip(h, '.ls-actions');
+          if (hl >= 2) strip(h, '.ls-q, .ls-tag');
+        },
+      });
+    } else if ((k === 'goals' || k === 'summary') && q) {
+      chunk(d.items, q + 1).forEach((items, i, all) => page(Object.assign({
+        title: `${s.title}（${i + 1}／${all.length}）`,
+        visual: (h) => {
+          if (k === 'goals') { LS.goals(h, Object.assign({}, d, { items, note: i === all.length - 1 ? d.note : '' })); return; }
+          LS.summary(h, { items });
+        },
+      }, i ? { _k: k, _d: { items } } : {})));
+    } else out.push(s);
+    // 「跟著做」頁的例題獨立成一頁，解答展開時不會擠爆概念欄
+    const first = out[0];
+    if (first.example) {
+      const ex = first.example; delete first.example;
+      const n = out.length;
+      out.push(Object.assign({}, s, {
+        sec: `${s.sec}-${n + 1}`, title: '再試一題', points: ['獨立做，再對答案。'], _k: 'help', _d: {}, _base: s.sec, _role: 'x', example: undefined,
+        visual: (h) => {
+          h.innerHTML = `<div class="ls ls-exit"><div class="ls-q">${ex.q}</div><ol class="ls-steps ls-sol" style="display:none">${(ex.steps || []).map(t => `<li>${t}</li>`).join('')}</ol><div class="ls-ans">答：${ex.ans}</div><div class="ls-actions ls-ui"><button class="ls-btn ls-ui" data-act="ans">看解答</button></div></div>`;
+          const b = h.querySelector('[data-act="ans"]'), a = h.querySelector('.ls-ans'), so = h.querySelector('.ls-sol');
+          b.onclick = () => { const on = !a.classList.contains('show'); a.classList.toggle('show', on); so.style.display = on ? '' : 'none'; b.textContent = on ? '收起解答' : '看解答'; if (window.MJ) MJ(h); };
+        },
+      }));
+    }
+    return out;
+  }
+
+  // 矮螢幕：只收邊距、按鈕與說明小字，教學文字維持 28pt
+  if (typeof document !== 'undefined' && document.head && document.head.appendChild) {
+    const st = document.createElement('style');
+    st.textContent = `.cover-card .cc-list { display: none; }
+    @media (max-height: 800px) { #coverChapters { display: none; } }
+    @media (max-height: 760px) and (min-width: 1081px) {
+      .topbar { height: 40px; }
+      .stage { padding-top: 4px; }
+      .slide { padding: 6px 16px; }
+      .slide-visual { padding: 4px 10px; }
+      .slide-visual .visual-host > .ls { padding-top: 22px; }
+      .badge { margin-bottom: 2px; padding: 1px 10px; }
+      .step-hint { display: none; }
+      .ictrl { margin-top: 2px; }
+      .ictrl input[type="range"] { height: 22px; }
+      .controlbar { padding: 2px 2px 3px; }
+      .nav-btn { padding: 3px 14px; }
+      .ls-sub { min-height: 0; }
+      .vis-zoom { top: 2px; right: 6px; padding: 1px 10px; }
+    }`;
+    document.head.appendChild(st);
+  }
   return {
+    expand,
     goals: (s, n, t, p, d, m) => mk('goals', s, n, t, p, (h) => LS.goals(h, d), d, m),
     summary: (s, n, items) => mk('summary', s, n || '核心知識小結', '本節核心知識小結', null, (h) => LS.summary(h, { items }), { items }),
     tasks: (s, n, t, p, q, m) => { const T = q.map((x, i) => ({ tier: 'ABC'[i], q: x[0], hints: x[1], ans: x[2] })); return mk('tasks', s, n, t, p, (h) => LS.tasks(h, T), { tiers: T }, m); },
@@ -207,7 +340,7 @@ window.S = window.S || (function () {
     slider: (s, n, t, p, visual, m) => mk('slider', s, n, t, p, visual, {}, m),
     stepper: (s, n, t, p, visual, m) => mk('stepper', s, n, t, p, visual, {}, m),
     stat: (s, n, t, p, visual, m) => mk('static', s, n, t, p, visual, {}, m),
-    phase: (ch, time, title, color, slides) => ({ ch, time, title, color, sections: slides.map(x => `${x.sec} ${x.secName}`), slides }),
+    phase: (ch, time, title, color, slides0) => { const slides = slides0.flatMap(expand); return { ch, time, title, color, sections: slides.map(x => `${x.sec} ${x.secName}`), slides }; },
   };
 })();
 

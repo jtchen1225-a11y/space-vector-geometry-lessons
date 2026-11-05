@@ -64,7 +64,7 @@ def lesson_plan(meta, phases, spiral, grade):
          '## B. 40分鐘教學流程表', '',
          '| 時間 | 階段 | 教師活動 | 學生活動 | 分層支持 | 學習證據 | 對應投影片 |', '|------|------|----------|----------|----------|----------|------------|']
     for i, ph in enumerate(phases):
-        secs = '、'.join(f"{s['code']} {s['name']}" for s in ph['sections'])
+        secs = '、'.join(f"{s['code']} {s['name']}" for s in ph['sections'] if s['kind'] != 'help')
         t = T[k][i]
         L.append(f"| {cell(ph['time'])} | {cell(ph['teacher_title'])} | {t[0]} | {t[1]} | {t[2]} | {t[3]} | {cell(secs)} |")
     L += ['']
@@ -76,7 +76,7 @@ def lesson_plan(meta, phases, spiral, grade):
         t = T[k][i]
         L += [f"### 第 {i + 1} 階段　{ph['time']}　{ph['teacher_title']}（簡報：{ph['title']}；螺旋：{ph['spiral']}）", '',
               f'- 教師活動：{t[0]}', f'- 學生活動：{t[1]}',
-              '- 教學資源：互動簡報 ' + '、'.join(f"{s['sec']} {s['secName']}" for s in ss) + '；學習單（handout.html）。',
+              '- 教學資源：互動簡報 ' + '、'.join(f"{s['sec']} {s['secName']}" for s in ss if s['_k'] != 'help') + '；學習單（handout.html）。',
               '- 理解檢查：' + ('；'.join(checks) if checks else t[3]),
               '- 可能困難（預期情況）：' + ('；'.join(trouble) if trouble else '起步較慢、未能用手勢表態。'),
               f'- 應對策略：{STRAT}', f'- 支援提示：{SUP[k][i]}', '']

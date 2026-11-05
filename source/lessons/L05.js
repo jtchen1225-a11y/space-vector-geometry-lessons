@@ -95,7 +95,7 @@ S.check('3-2','比一比：正負','比一比：同一條棱，兩種方向',['�
  ['2','概念錯誤：以為數量積不受方向影響'],
  ['0','概念錯誤：以為反向就垂直']
 ]),
-S.drill('3-3','第二關：比一比','第二關：平行六面體比一比',['基底 \\(|\\boldsymbol{a}|=|\\boldsymbol{b}|=2\\)，\\(|\\boldsymbol{c}|=3\\)。','兩兩夾角 60°。'],7,['中間項符號錯（程序）','夾角當垂直（概念）'],[
+S.drill('3-3','第二關：比一比','第二關：平行六面體比一比',['\\(\\boldsymbol{a}\\)、\\(\\boldsymbol{b}\\) 長 2，\\(\\boldsymbol{c}\\) 長 3。','兩兩夾角 60°。'],7,['中間項符號錯（程序）','夾角當垂直（概念）'],[
  ['求 \\(|\\boldsymbol{a}+\\boldsymbol{b}|^2\\)',['\\(\\boldsymbol{a}\\cdot\\boldsymbol{b}=2\\)。'],'12'],
  ['求體對角線 AC₁ 的長',['\\(\\overrightarrow{AC_1}=\\boldsymbol{a}+\\boldsymbol{b}+\\boldsymbol{c}\\)','\\(\\boldsymbol{a}\\cdot\\boldsymbol{c}=\\boldsymbol{b}\\cdot\\boldsymbol{c}=3\\)'],'\\(\\sqrt{33}\\)'],
  ['比較 AC₁ 與 BD₁ 誰長，為甚麼會不同？',null,'\\(|BD_1|=\\sqrt{13}\\)，較短：\\(\\boldsymbol{a}\\) 變號後，與它有關的兩個中間項變號']

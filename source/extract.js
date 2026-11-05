@@ -12,7 +12,8 @@ for (let i = 1; i < parts.length; i += 3) {
   else blk[parts[i]] = parts[i + 2].trim();
 }
 const stubEl = () => new Proxy({}, { get: () => () => stubEl(), set: () => true });
-const sb = { window: {}, console, Math, JSON, LS: {}, SV: new Proxy({}, { get: () => () => '' }), MJ: () => {} };
+const fitPath = path.join(here, 'fit.json');
+const sb = { window: { FIT: (fs.existsSync(fitPath) ? JSON.parse(fs.readFileSync(fitPath, 'utf8')) : {})[lid] || {} }, console, Math, JSON, LS: {}, SV: new Proxy({}, { get: () => () => '' }), MJ: () => {} };
 sb.globalThis = sb;
 vm.createContext(sb);
 vm.runInContext(fs.readFileSync(path.join(here, 'runtime.js'), 'utf8'), sb);
@@ -40,8 +41,8 @@ const meta = vm.runInContext('(' + blk.meta + ')', sb);
 const shared = blk.shared || '';
 const pre = 'const C="#2563eb";const {RED,GRN,BLU,VIO,AMB,INK,GRY,vv,bb}=window.G3;const G3=window.G3,S=window.S;\n' + shared + '\n';
 meta.phases = Object.keys(blk.chs).sort((a, b) => a - b).map(n => {
-  const slides = vm.runInContext(`(function(){${pre}return [${blk.chs[n].replace(/,\s*$/, '')}];})()`, sb);
-  return { slides: slides.map(s => ({ sec: s.sec, secName: s.secName, title: s.title, points: s.points, _k: s._k, _d: s._d, example: s.example })) };
+  const slides = vm.runInContext(`(function(){${pre}return [${blk.chs[n].replace(/,\s*$/, '')}].flatMap(S.expand);})()`, sb);
+  return { slides: slides.map(s => ({ sec: s.sec, secName: s.secName, title: s.title, points: s.points, _k: s._k, _d: s._d, _base: s._base })) };
 });
 meta.assertCount = count;
 process.stdout.write(JSON.stringify(meta));

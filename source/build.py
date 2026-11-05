@@ -78,7 +78,9 @@ def build_lesson(lid, audio=True):
         phases.append({k: ph[k] for k in ('time', 'title', 'teacher_title', 'spiral')} | {'sections': secs})
     cfg = {'title': f"L{meta['id']:02d} {meta['topic']}（{TYPE_NAME[kind]}）", 'grade': GRADE, 'topic': meta['topic'], 'goal': meta['goal'],
            'prior': meta['prior'], 'focus': meta['focus'], 'difficulty': meta['difficulty'],
-           'eyebrow': f"第一章 空間向量與立體幾何｜第 {meta['id']} 節／共 24 節｜{TYPE_NAME[kind]}", 'phases': phases}
+           'eyebrow': f"第一章 空間向量與立體幾何｜第 {meta['id']} 節／共 24 節｜{TYPE_NAME[kind]}",
+           # 拆頁產生的後續頁（kind=help）對鷹架工具而言是一般靜態頁
+           'phases': [ph | {'sections': [s | {'kind': 'static' if s['kind'] == 'help' else s['kind']} for s in ph['sections']]} for ph in phases]}
     os.makedirs(out, exist_ok=True)
     with open(os.path.join(out, 'lesson.json'), 'w', encoding='utf-8') as fh:
         json.dump(cfg, fh, ensure_ascii=False, indent=1)
@@ -89,6 +91,9 @@ def build_lesson(lid, audio=True):
     # 換上本節內容
     with open(os.path.join(HERE, 'runtime.js'), encoding='utf-8') as fh:
         runtime = fh.read()
+    fit_path = os.path.join(HERE, 'fit.json')
+    fit = json.load(open(fit_path, encoding='utf-8')).get(lid, {}) if os.path.isfile(fit_path) else {}
+    runtime = f'window.FIT = {json.dumps(fit)};\n' + runtime
     for i, ph in enumerate(phases, start=1):
         js = ch_js(i, ph, PALETTE[i - 1], src['chs'][i], src.get('shared', ''), prefix=runtime + '\n' if i == 1 else '')
         with open(os.path.join(out, 'site', f'ch{i}.js'), 'w', encoding='utf-8', newline='\n') as fh:
